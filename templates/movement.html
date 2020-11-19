@@ -1,0 +1,113 @@
+{% extends "template.html" %}
+{% block body %}
+<br>
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-warning" role="alert">
+  {{message}}
+</div>
+{% endfor %}
+{% endwith %}
+<form action="/movement" method="POST">
+  <div class="container">
+    <table class="table">
+
+      <div class="row">
+        <div class="form-group col">
+          <label for="f_location">From</label>
+          <select class="form-control" name="f_location">
+            <option value="">None</option>
+            {% for location in locations %}
+            <option>{{location.location_name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col">
+          <label for="f_location">To</label>
+          <select class="form-control" name="t_location">
+            <option selected value="">None</option>
+            {% for location in locations %}
+            <option>{{location.location_name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col">
+          <label for="f_location">Product</label>
+          <select class="form-control" name="product">
+            <option selected>select</option>
+            {% for product in products %}
+            <option>{{product.product_name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group col">
+          <label for="f_location">Quantity</label>
+          <input type="number" class="form-control" min="0" name="qty" required></input>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <button type="submit" class="btn btn-primary float-left">Add Movement</button>
+        </div>
+      </div>
+      </tbody>
+    </table>
+  </div>
+</form>
+<table class="table table-borderless" id="myTable">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Movement_ID</th>
+      <th scope="col">From_Location</th>
+      <th scope="col">To_Location</th>
+      <th scope="col">Product</th>
+      <th scope="col">Qty</th>
+      <th scope="col">DATETIME</th>
+      <th scope="col">Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for movement in movements %}
+      <tr >
+        <th scope="row">{{movement.movement_id}}</th>
+        <td>{{movement.from_location}}</td>
+        <td>{{movement.to_location}}</td>
+        <td>{{movement.product}}</td>
+        <td>{{movement.qty}}</td>
+        <td>{{movement.timestamp}}</td>
+        <td><a class="btn btn-outline-dark btn-sm" href="/update_movement/{{movement.movement_id}}">Update</a></td>
+      
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- <script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("mTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    
+  }
+  }
+  </script> -->
+
+{% endblock %}

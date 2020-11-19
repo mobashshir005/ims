@@ -1,0 +1,76 @@
+{% extends "template.html" %}
+{% block body %}
+<br>
+<div class="container">
+  <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#myModal">Add
+    Location</button>
+  <div class="table-responsive">
+    <br>
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog" style="margin-top: 100px;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form action="/location" method="post">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Location</label>
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Location">
+              </div>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-borderless" id="myTable">
+    <thead class="thead-light">
+      <tr>
+        <th>Location_ID</th>
+        <th>Location_Name</th>
+        <th>Update_Location</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for loc in locations %}
+      <tr>
+        <td>{{loc.location_id}}</td>
+        <td>{{loc.location_name}}</td>
+        <td><a href="/l_update/{{loc.location_id}}"><button class="btn btn-outline-dark btn-sm">Edit</button></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <hr>
+</div>
+
+<!-- <script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("lTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  </script> -->
+
+{% endblock %}

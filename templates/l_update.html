@@ -1,0 +1,13 @@
+{% extends "template.html" %}
+{% block body %}
+<div class="container" style="text-align: center; margin-top: 20px;"> 
+    <form action="/l_update/{{id}}" method="POST">
+        <div class="form-group">
+          <label for="text"><h1> Update Location</h1></label>
+          <input type="text" class="form-control" name="lname" id="exampleInputEmail1" aria-describedby="text" value="{{location.location_name}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    {% endblock %}
+
